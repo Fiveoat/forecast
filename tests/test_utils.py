@@ -23,7 +23,9 @@ FORECAST_DATE = datetime(year=2022, month=10, day=19).date()
         (UTC_NOW, UTC_NOW + timedelta(hours=10), UTC_NOW + timedelta(hours=5)),
     ],
 )
-def test_get_is_daylight_when_given_day_hours(sunrise_time: datetime, sunset_time: datetime, tide_time: datetime):
+def test_get_is_daylight_when_given_day_hours(
+    sunrise_time: datetime, sunset_time: datetime, tide_time: datetime
+) -> None:
     assert get_is_daylight(sunrise_time, sunset_time, tide_time) is True
 
 
@@ -34,7 +36,9 @@ def test_get_is_daylight_when_given_day_hours(sunrise_time: datetime, sunset_tim
         (UTC_NOW, UTC_NOW + timedelta(hours=1), UTC_NOW + timedelta(hours=5)),
     ],
 )
-def test_get_is_daylight_when_given_non_day_hours(sunrise_time: datetime, sunset_time: datetime, tide_time: datetime):
+def test_get_is_daylight_when_given_non_day_hours(
+    sunrise_time: datetime, sunset_time: datetime, tide_time: datetime
+) -> None:
     assert get_is_daylight(sunrise_time, sunset_time, tide_time) is False
 
 
@@ -48,7 +52,7 @@ def test_get_is_daylight_when_given_non_day_hours(sunrise_time: datetime, sunset
         ("Moonset: 3:00AM", "Wednesday 19 October 2022"),
     ],
 )
-def test_get_datetime(time: str, date: Optional[str]):
+def test_get_datetime(time: str, date: Optional[str]) -> None:
     correct_datetime = datetime(year=2022, day=19, month=10, hour=3)
     derived_datetime = get_datetime(time, date)
     assert type(derived_datetime) == datetime
@@ -63,7 +67,7 @@ def test_get_datetime(time: str, date: Optional[str]):
         ("1.19 ft (0.36 m)", 1.19),
     ],
 )
-def test_get_height(height: str, expected_height: float):
+def test_get_height(height: str, expected_height: float) -> None:
     derived_height = get_height(height)
     assert derived_height == expected_height
     assert type(derived_height) == float
@@ -80,7 +84,7 @@ def test_get_height(height: str, expected_height: float):
         ("Moonset: 3:49PM", "moonset_time", "datetime"),
     ],
 )
-def test_get_data_key(element: str, expected_data_key: str, expected_data_type: str):
+def test_get_data_key(element: str, expected_data_key: str, expected_data_type: str) -> None:
     data_key, data_type = get_data_key(element)
     assert data_key == expected_data_key
     assert data_type == expected_data_type
@@ -98,7 +102,7 @@ def test_get_data_key(element: str, expected_data_key: str, expected_data_type: 
         ("",),
     ],
 )
-def test_get_data_key_with_invalid_key(element: str):
+def test_get_data_key_with_invalid_key(element: str) -> None:
     with pytest.raises(DataKeyNotFound):
         get_data_key(element)
 
@@ -153,5 +157,5 @@ def test_convert_value(
     data_key: str,
     forecast_date: datetime.date,
     converted_value: Any,
-):
+) -> None:
     assert convert_value(value, data_type, data_key, forecast_date) == converted_value
