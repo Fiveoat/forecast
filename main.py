@@ -59,10 +59,14 @@ def get_daily_forecast(day_forecast_soup: BeautifulSoup) -> Forecast:
     return Forecast(**forecast)
 
 
+def get_day_forecast_soups(soup: BeautifulSoup) -> List[BeautifulSoup]:
+    return soup.find_all("div", {"class": "tide-day"})
+
+
 def main() -> None:
     data = []
     for location in LOCATIONS:
-        for day_forecast_soup in get_tide_forecast_soup(location).find_all("div", {"class": "tide-day"}):
+        for day_forecast_soup in get_day_forecast_soups(get_tide_forecast_soup(location)):
             forecast = get_daily_forecast(day_forecast_soup)
             for daylight_low_tide_forecast in get_daylight_low_tides(forecast):
                 daylight_low_tide_forecast = daylight_low_tide_forecast.dict()
