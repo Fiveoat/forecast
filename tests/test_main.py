@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 from main import get_daylight_low_tides, Forecast, Tide, get_daily_forecast, get_day_forecast_soups
 
-HALF_MOON_LOW_TIDES = [
+HALF_MOON_DAYLIGHT_LOW_TIDES = [
     {'feet_height': 2.47, 'tide_type': 'Low Tide', 'tide_time': datetime(2022, 9, 22, 15, 23)},
     {'feet_height': 2.11, 'tide_type': 'Low Tide', 'tide_time': datetime(2022, 9, 23, 15, 58)},
     {'feet_height': 1.72, 'tide_type': 'Low Tide', 'tide_time': datetime(2022, 9, 24, 16, 32)},
@@ -90,5 +90,5 @@ def test_get_daily_forecast():
         assert len(daily_forecast.tides) in [3, 4]
         daylight_low_tides = get_daylight_low_tides(daily_forecast)
         for day_light_low_tide in daylight_low_tides:
-            assert day_light_low_tide.dict() in HALF_MOON_LOW_TIDES
+            assert day_light_low_tide.dict() in HALF_MOON_DAYLIGHT_LOW_TIDES
         assert len(daylight_low_tides) in [0, 1, 2]
