@@ -5,4 +5,5 @@ LOCATIONS = [
     "Huntington-Beach",
     "Providence-Rhode-Island",
     "Wrightsville-Beach-North-Carolina",
+    "Boise-Idaho",
 ]
